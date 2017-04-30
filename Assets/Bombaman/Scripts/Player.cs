@@ -26,18 +26,19 @@ public class Player : MonoBehaviour
 		float inputX = Input.GetAxisRaw ("Horizontal");
 		float inputY = Input.GetAxisRaw ("Vertical");
 
+		// only move in y direction
 		if (Mathf.Abs (inputY) >= Mathf.Abs (inputX)) {
 			inputX = 0;
 		}
-
+		// only move in x direction
 		if (Mathf.Abs (inputX) >= Mathf.Abs (inputY)) {
 			inputY = 0;
 		}
 
 		bool isWalking = (Mathf.Abs (inputX) + Mathf.Abs (inputY)) > 0;
-
 		anim.SetBool ("isWalking", isWalking);
 
+		// if walking, move in x/y direction
 		if (isWalking) {
 			anim.SetFloat ("speedX", inputX);
 			anim.SetFloat ("speedY", inputY);
@@ -53,9 +54,9 @@ public class Player : MonoBehaviour
 		float lastInputX = Input.GetAxisRaw ("Horizontal");
 		float lastInputY = Input.GetAxisRaw ("Vertical");
 
+		// determine last walk direction
 		if (lastInputX != 0 || lastInputY != 0) {
 			anim.SetBool ("isWalking", true);
-
 
 			if (lastInputX > 0) {
 				anim.SetFloat ("lastMoveX", 1f);

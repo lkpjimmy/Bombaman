@@ -4,11 +4,10 @@ using System.Collections;
 public class Bomb : MonoBehaviour 
 {
 	public Model model;
-
 	public CircleCollider2D circleCollider;
 	public GameObject explosion;
 
-	// Use this for initialization
+	// start bomb explosion immediately
 	void Start () 
 	{ 
 		model = GameObject.Find ("Model").GetComponent <Model> ();
@@ -30,6 +29,7 @@ public class Bomb : MonoBehaviour
 		StartCoroutine (destroyBomb ());
 	}
 
+	// when bomb explode, interaction with surrounding
 	private void OnCollisionEnter2D (Collision2D other)
 	{
 		if (other.gameObject.tag == "Brick") {
