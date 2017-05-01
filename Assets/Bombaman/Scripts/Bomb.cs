@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class Bomb : MonoBehaviour 
+public class Bomb : NetworkBehaviour
 {
-	public Model model;
-	public CircleCollider2D circleCollider;
+	public AttackerModel attackerModel;
+	
 	public GameObject explosion;
+	public CircleCollider2D circleCollider;
 
-	// start bomb explosion immediately
+	public float power = 20f;
+
+	// Start bomb explosion in 2 seconds
 	void Start () 
 	{ 
-		model = GameObject.Find ("Model").GetComponent <Model> ();
-		StartCoroutine (playExplosion ());
+		Invoke ("CmdSpawnExplosion", 2.0f);
 	}
 
 	// Update is called once per frame
@@ -19,38 +22,42 @@ public class Bomb : MonoBehaviour
 	{
 
 	}
-
-	private IEnumerator playExplosion ()
+		
+	[Command]
+	private void CmdSpawnExplosion ()
 	{
-		yield return new WaitForSeconds (2.0f);
-		Instantiate (explosion, this.transform.position, Quaternion.identity);
+		Debug.Log (NetworkServer.active);
+
+		GameObject explosionObj = Instantiate (explosion, this.transform.position, Quaternion.identity) as GameObject;
+		NetworkServer.Spawn (explosionObj);
+
 		circleCollider.enabled = true;
 	
-		StartCoroutine (destroyBomb ());
+		Invoke ("destroyBomb", 0.5f);
 	}
-
-	// when bomb explode, interaction with surrounding
+		
+	// When bomb explodes, interact with surrounding
 	private void OnCollisionEnter2D (Collision2D other)
 	{
 		if (other.gameObject.tag == "Brick") {
 			StartCoroutine (destroyBrick (other));
-		}
+		} 
+
 		else if (other.gameObject.tag != "Player") {
 			other.gameObject.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 			other.gameObject.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (2000, 2000));
 		}
+	}
+		
+	private void destroyBomb ()
+	{
+		Destroy (this.gameObject);
+		attackerModel.activeBombCount += 1;
 	}
 
 	private IEnumerator destroyBrick (Collision2D other)
 	{
 		yield return new WaitForSeconds (0.0f);
 		other.gameObject.SetActive (false);
-	}
-
-	private IEnumerator destroyBomb ()
-	{
-		yield return new WaitForSeconds (0.5f);
-		model.changeActiveBombCount (1);
-		Destroy (this.gameObject);
 	}
 }

@@ -2,9 +2,6 @@
 
 public class Model : MonoBehaviour 
 {
-
-	public GameObject attacker;
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -15,10 +12,5 @@ public class Model : MonoBehaviour
 	void Update () 
 	{
 
-	}
-
-	public void changeActiveBombCount (int amount)
-	{
-		attacker.GetComponent<Attacker>().activeBombCount += amount;	
 	}
 }
