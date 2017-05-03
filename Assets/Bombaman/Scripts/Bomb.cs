@@ -4,12 +4,11 @@ using System.Collections;
 
 public class Bomb : NetworkBehaviour
 {
-	public AttackerModel attackerModel;
-	
 	public GameObject explosion;
 	public CircleCollider2D circleCollider;
 
-	public float power = 20f;
+	public float bombPower = 20f;
+	public float bombRadius = 0.3f;
 
 	// Start bomb explosion in 2 seconds
 	void Start () 
@@ -26,36 +25,35 @@ public class Bomb : NetworkBehaviour
 	[Command]
 	private void CmdSpawnExplosion ()
 	{
-		Debug.Log (NetworkServer.active);
-
-		GameObject explosionObj = Instantiate (explosion, this.transform.position, Quaternion.identity) as GameObject;
+		GameObject explosionObj = Instantiate (this.explosion, this.transform.position, Quaternion.identity) as GameObject;
 		NetworkServer.Spawn (explosionObj);
 
 		circleCollider.enabled = true;
 	
-		Invoke ("destroyBomb", 0.5f);
+		Invoke ("DestroyBomb", 0.5f);
 	}
 		
+	private void DestroyBomb ()
+	{
+		Destroy (this.gameObject);
+	}
+
 	// When bomb explodes, interact with surrounding
 	private void OnCollisionEnter2D (Collision2D other)
 	{
 		if (other.gameObject.tag == "Brick") {
-			StartCoroutine (destroyBrick (other));
-		} 
-
-		else if (other.gameObject.tag != "Player") {
+			StartCoroutine (DestroyBrick (other));
+		}
+		else if (other.gameObject.tag == "Player") {
+			other.gameObject.GetComponent<CharacterModel> ().TakeDamage (this.bombPower);
+		}
+		else {
 			other.gameObject.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;
 			other.gameObject.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (2000, 2000));
 		}
 	}
-		
-	private void destroyBomb ()
-	{
-		Destroy (this.gameObject);
-		attackerModel.activeBombCount += 1;
-	}
 
-	private IEnumerator destroyBrick (Collision2D other)
+	private IEnumerator DestroyBrick (Collision2D other)
 	{
 		yield return new WaitForSeconds (0.0f);
 		other.gameObject.SetActive (false);

@@ -2,8 +2,14 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class Defender : Player
+public class Defender : NetworkBehaviour
 {
+	public CharacterController characterController;
+
+	public GameObject brick;
+
+	[SyncVar]
+	public float brickTimer = 5f;
 
 	// Use this for initialization
 	void Start ()
@@ -12,37 +18,55 @@ public class Defender : Player
 	}
 
 	// Update is called once per frame
-	void Update()
+	void Update ()
 	{
+		if (!isLocalPlayer) {
+			return;
+		}
 
+		this.characterController.Walk ();
+
+		this.brickTimer -= Time.deltaTime;
+		if (Input.GetKey (KeyCode.C)) {
+			this.CmdConstructBrick ();
+		}
 	}
 
 	void FixedUpdate () 
 	{
+		if (!isLocalPlayer) {
+			return;
+		}
 
+		this.characterController.LastWalk ();
 	}
 
-	private void constructBrick ()
+	[Command]
+	private void CmdConstructBrick ()
 	{
-		// Vector3 pos = this.transform.position;
+		 Vector3 currentPos = this.transform.position;
 
-		// if (this.timer < 3) {
-		// 	Instantiate (block, pos, Quaternion.identity);
-		// 	this.timer = 5;
-		// }
+		 if (this.brickTimer < 3) {
+			GameObject brickObj = Instantiate (this.brick, currentPos, Quaternion.identity) as GameObject;
+			NetworkServer.Spawn (brickObj);
+
+		 	this.brickTimer = 5;
+		 }
 	}
 
 	private void OnCollisionStay2D (Collision2D other)
 	{
-		// this.destructObstacle (other);
+		 this.CmdDestructObstacle (other);
 	}
 
-	private void destructObstacle (Collision2D other)
+	[Command]
+	private void CmdDestructObstacle (Collision2D other)
 	{
-		// if (Input.GetKey (KeyCode.E)) {
-		// 	if (other.gameObject.tag == "Obstacle") {
-		// 		Destroy (other.gameObject);
-		// 	}
-		// }
+		if (Input.GetKey (KeyCode.E)) {
+	 		if (other.gameObject.tag == "Obstacle") {
+
+				NetworkServer.Destroy (other.gameObject);
+	 		}
+	 	}
 	}
 }

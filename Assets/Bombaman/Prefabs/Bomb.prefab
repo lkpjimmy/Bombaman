@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1000013995921848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalScale: {x: 60, y: 60, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -57,7 +57,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!114 &114000012665448138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,11 +69,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79b853dbd61b7940a12051d73294078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackerModel: {fileID: 114000011759118022, guid: 1df5c1ec4b78e4c41afaaebafa5df092,
-    type: 2}
   explosion: {fileID: 100000, guid: e0dc4d47bced6d54ab1461804114b5d0, type: 2}
   circleCollider: {fileID: 58000013789742978}
-  power: 20
+  bombPower: 20
+  bombRadius: 0.3
 --- !u!114 &114000012763238826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_SendInterval: 0.083333336
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 2
   m_SyncSpin: 0

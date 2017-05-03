@@ -1,4 +1,4 @@
-﻿// this file is for testing code, please do not delete
+﻿// This file is for testing code, please do not delete
 
 using UnityEngine;
 

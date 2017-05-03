@@ -1,58 +1,35 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections;
 
-public class AttackerController : NetworkBehaviour
+public class CharacterController : NetworkBehaviour 
 {
-	public AttackerModel attackerModel;
+	public CharacterModel characterModel;
+
 	public Rigidbody2D rigidBody;
 	public Animator animator;
-
-	private float timer = 5f;
 
 	// Use this for initialization
 	void Start ()
 	{
-		this.attackerModel = GetComponent <AttackerModel> ();
-		this.rigidBody = GetComponent <Rigidbody2D> ();
-		this.animator = GetComponent <Animator>();
+	
 	}
-		
+	
 	// Update is called once per frame
-	void Update()
+	void Update () 
 	{
-		if (!isLocalPlayer) {
-			return;
-		}
-
-		this.timer -= Time.deltaTime;
-
-		this.walk ();
-
-		if (Input.GetKey (KeyCode.Space)) {
-			this.CmdSpawnBomb ();
-		}
+	
 	}
 
-	void FixedUpdate () 
-	{
-		if (!isLocalPlayer) {
-			return;
-		}
-
-		this.lastWalk ();
-	}
-
-	private void walk ()
+	public void Walk ()
 	{
 		float inputX = Input.GetAxisRaw ("Horizontal");
 		float inputY = Input.GetAxisRaw ("Vertical");
 
-		// only move in y direction
+		// Only move in y direction
 		if (Mathf.Abs (inputY) >= Mathf.Abs (inputX)) {
 			inputX = 0;
 		}
-		// only move in x direction
+		// Only move in x direction
 		if (Mathf.Abs (inputX) >= Mathf.Abs (inputY)) {
 			inputY = 0;
 		}
@@ -60,23 +37,23 @@ public class AttackerController : NetworkBehaviour
 		bool isWalking = (Mathf.Abs (inputX) + Mathf.Abs (inputY)) > 0;
 		animator.SetBool ("isWalking", isWalking);
 
-		// if walking, move in x/y direction
+		// If walking, move in x/y direction
 		if (isWalking) {
 			animator.SetFloat ("speedX", inputX);
 			animator.SetFloat ("speedY", inputY);
 
-			rigidBody.velocity = new Vector2 (inputX * attackerModel.speed.x, inputY * attackerModel.speed.y);
+			rigidBody.velocity = new Vector2 (inputX * this.characterModel.speed.x, inputY * this.characterModel.speed.y);
 		} else {
 			rigidBody.velocity = new Vector2 (0, 0);
 		}
 	}
 
-	private void lastWalk ()
+	public void LastWalk ()
 	{
 		float lastInputX = Input.GetAxisRaw ("Horizontal");
 		float lastInputY = Input.GetAxisRaw ("Vertical");
 
-		// determine last walk direction
+		// Determine last walk direction
 		if (lastInputX != 0 || lastInputY != 0) {
 			animator.SetBool ("isWalking", true);
 
@@ -97,21 +74,6 @@ public class AttackerController : NetworkBehaviour
 			}
 		} else {
 			animator.SetBool ("isWalking", false);
-		}
-	}
-
-	[Command]
-	private void CmdSpawnBomb ()
-	{
-		if (this.timer < 4f && this.attackerModel.activeBombCount > 0) {
-			Vector3 currentPos = this.transform.position;
-			attackerModel.bomb.GetComponent<Bomb> ().attackerModel = attackerModel;
-
-			GameObject bombObj = Instantiate (attackerModel.bomb, currentPos, Quaternion.identity) as GameObject;
-			NetworkServer.Spawn (bombObj);
-			attackerModel.activeBombCount -= 1;
-
-			this.timer = 5f;
 		}
 	}
 }
