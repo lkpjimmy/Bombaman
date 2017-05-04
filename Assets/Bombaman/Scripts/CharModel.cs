@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class CharacterModel : NetworkBehaviour
+public class CharModel : NetworkBehaviour
 {
 	[SyncVar (hook = "OnHealthChanged")] public float currentHP = 100f;
 	public float maxHP = 100f;

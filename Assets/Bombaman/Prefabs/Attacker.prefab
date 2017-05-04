@@ -61,9 +61,9 @@ GameObject:
   - 114: {fileID: 114000011653270416}
   - 114: {fileID: 114000011332918322}
   - 114: {fileID: 114000012175301076}
-  - 114: {fileID: 114000010685138528}
-  - 114: {fileID: 114000010949318240}
-  - 114: {fileID: 114000010301476170}
+  - 114: {fileID: 114000011085856460}
+  - 114: {fileID: 114000011107493318}
+  - 114: {fileID: 114000010522889684}
   m_Layer: 0
   m_Name: Attacker
   m_TagString: Player
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000010301476170
+--- !u!114 &114000010522889684
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -188,10 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df38b42dbb0379843baabdbe737f48f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterModel: {fileID: 114000010949318240}
+  charModel: {fileID: 114000011107493318}
   rigidBody: {fileID: 50000013671038410}
   animator: {fileID: 95000011255863228}
---- !u!114 &114000010685138528
+--- !u!114 &114000011085856460
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -202,12 +202,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27387fbde50dc8842a7ee70a15fbf644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 114000010301476170}
+  charController: {fileID: 114000010522889684}
   bomb: {fileID: 1000013995921848, guid: d3cf84a36ca99a74993ff54c3ede21c0, type: 2}
   activeBombCount: 1
   bombPower: 20
   bombRadius: 0.3
---- !u!114 &114000010949318240
+--- !u!114 &114000011107493318
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 2
-  m_SendInterval: 0.083333336
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 2
   m_SyncSpin: 0

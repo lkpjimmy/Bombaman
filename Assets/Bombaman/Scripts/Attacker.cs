@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Attacker : NetworkBehaviour 
 {
-	public CharacterController characterController;
+	public CharController charController;
 
 	public GameObject bomb;
 
@@ -28,7 +28,7 @@ public class Attacker : NetworkBehaviour
 			return;
 		}
 
-		this.characterController.Walk ();
+		this.charController.Walk ();
 
 		if (Input.GetButtonDown ("Jump") && this.activeBombCount >= 1) {
 			this.CmdSpawnBomb ();
@@ -41,7 +41,7 @@ public class Attacker : NetworkBehaviour
 			return;
 		}
 
-		this.characterController.LastWalk ();
+		this.charController.LastWalk ();
 	}
 		
 	[Command]

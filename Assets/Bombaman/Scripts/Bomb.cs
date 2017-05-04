@@ -45,7 +45,7 @@ public class Bomb : NetworkBehaviour
 			StartCoroutine (DestroyBrick (other));
 		}
 		else if (other.gameObject.tag == "Player") {
-			other.gameObject.GetComponent<CharacterModel> ().TakeDamage (this.bombPower);
+			other.gameObject.GetComponent<CharModel> ().TakeDamage (this.bombPower);
 		}
 		else {
 			other.gameObject.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.None;

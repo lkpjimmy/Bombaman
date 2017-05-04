@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class CharacterController : NetworkBehaviour 
+public class CharController : NetworkBehaviour 
 {
-	public CharacterModel characterModel;
+	public CharModel charModel;
 
 	public Rigidbody2D rigidBody;
 	public Animator animator;
@@ -42,7 +42,7 @@ public class CharacterController : NetworkBehaviour
 			animator.SetFloat ("speedX", inputX);
 			animator.SetFloat ("speedY", inputY);
 
-			rigidBody.velocity = new Vector2 (inputX * this.characterModel.speed.x, inputY * this.characterModel.speed.y);
+			rigidBody.velocity = new Vector2 (inputX * this.charModel.speed.x, inputY * this.charModel.speed.y);
 		} else {
 			rigidBody.velocity = new Vector2 (0, 0);
 		}
