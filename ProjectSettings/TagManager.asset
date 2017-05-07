@@ -4,7 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Fire
+  - Wall
+  - Brick
+  - Obstacle
+  - Bomb
+  - BombCount
+  - ExplosionRange
+  - Boot
+  - Shield
+  - RedPortion
+  - Poison
+  - Fireball
+  - Trap
   layers:
   - Default
   - TransparentFX

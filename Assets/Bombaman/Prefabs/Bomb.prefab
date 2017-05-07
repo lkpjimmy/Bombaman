@@ -21,12 +21,13 @@ GameObject:
   - 4: {fileID: 4000012731867630}
   - 212: {fileID: 212000012231641644}
   - 58: {fileID: 58000013789742978}
+  - 50: {fileID: 50000011944069808}
   - 114: {fileID: 114000012763238826}
   - 114: {fileID: 114000014183304800}
   - 114: {fileID: 114000010302775056}
   m_Layer: 0
   m_Name: Bomb
-  m_TagString: Untagged
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +45,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &50000011944069808
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013995921848}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!58 &58000013789742978
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -69,8 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79b853dbd61b7940a12051d73294078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 100000, guid: e0dc4d47bced6d54ab1461804114b5d0, type: 2}
-  circleCollider: {fileID: 58000013789742978}
+  explosion: {fileID: 100000, guid: 9538939cf348e3141ba62c84f9d398d4, type: 2}
+  circleCollider2D: {fileID: 58000013789742978}
   bombPower: 20
   bombRadius: 0.3
 --- !u!114 &114000012763238826
@@ -117,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0.07692308
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 2
   m_SyncSpin: 0

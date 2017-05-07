@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 114000013110762006}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Graphic explosion
+  m_Name: GraphicExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 18, y: 18, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 400002}
@@ -532,22 +532,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 224
-    i1: 220
-    i2: 77
-    i3: 71
-    i4: 188
-    i5: 237
-    i6: 109
-    i7: 84
-    i8: 171
-    i9: 20
-    i10: 97
-    i11: 128
-    i12: 65
-    i13: 20
-    i14: 181
-    i15: 208
+    i0: 149
+    i1: 56
+    i2: 147
+    i3: 156
+    i4: 243
+    i5: 72
+    i6: 227
+    i7: 20
+    i8: 27
+    i9: 166
+    i10: 44
+    i11: 132
+    i12: 249
+    i13: 211
+    i14: 152
+    i15: 212
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114000013110762006

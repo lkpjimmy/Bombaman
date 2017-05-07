@@ -1,8 +1,9 @@
 // script to render explosion
 using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class GraphicExplosion : MonoBehaviour
+public class GraphicExplosion : NetworkBehaviour
 {
 	public float loopduration;
 	private float ramptime = 0;
